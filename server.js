@@ -12,7 +12,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //app.use('/api/control', require(exersizes))
 
-console.log(exersizes);
+//console.log(exersizes);
+
+require("./routes/api/apiRoutes")(app);
+require("./routes/html/htmlRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 
