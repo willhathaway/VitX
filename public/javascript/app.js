@@ -78,26 +78,29 @@ $(document).ready(function () {
 
     // for adding items to submit to server:
 
+    let exersizePostArray = [];
+
     $(document).on("click", ".exersize", function () {
+
+        $("#exersizes-topost").html("");
 
         console.log("add exersize to post form");
 
         let thisID = this.id;
 
         $.get("api/exersizes", function (data) {
-            let results = [];
 
             for (let i = 0; i < data.length; i++) {
 
                 if (data[i].id === thisID) {
-                    results.push(data[i]);
+                    exersizePostArray.push(data[i]);
                 }
             }
 
-            for (let i = 0; i < results.length; i++) {
+            for (let i = 0; i < exersizePostArray.length; i++) {
                 let postExersize = $("<p>");
-                $(postExersize).html(results[i].name);
-                $("#exersizes-post").append(postExersize);
+                $(postExersize).html(exersizePostArray[i].name);
+                $("#exersizes-topost").append(postExersize);
             }
 
         });
@@ -105,29 +108,73 @@ $(document).ready(function () {
 
     })
 
+    let nutritionPostArray = [];
+
     $(document).on("click", ".nutrition", function () {
+
+        $("#nutrition-topost").html("");
 
         console.log("add nutrition to post form");
 
         let thisID = this.id;
 
-        console.log(foodOptions);
-
-        console.log(thisID);
-        console.log(foodOptions[0].food.foodId);
-
         for (let i = 0; i < foodOptions.length; i++) {
-            
+
             if (foodOptions[i].food.foodId === thisID) {
-                let postNutrition = $("<p>");
-                $(postNutrition).html(foodOptions[i].food.label);
-                $("#nutrition-post").append(postNutrition);
+                nutritionPostArray.push(foodOptions[i]);
             }
+        }
+
+        
+
+        for (let i = 0; i < nutritionPostArray.length; i++) {     
+            let postNutrition = $("<p>");
+            $(postNutrition).html(foodOptions[i].food.label);
+            $("#nutrition-topost").append(postNutrition);
         }
 
     })
 
 
+    // for posting to server:
+
+    $("#post-exersizes").on("click", function () {
+
+        let postData = {};
+
+        for (let i = 0; i < exersizePostArray.length; i++) {
+
+            console.log(exersizePostArray[i]);
+            postData[i] = exersizePostArray[i];
+
+        }
+
+        console.log(postData)
+
+        $.post("api/workouts", postData).then(function (data) {
+            console.log(data);
+        })
+
+    })
+
+    $("#post-nutrition").on("click", function () {
+
+        let postData = {};
+
+        for (let i = 0; i < nutritionPostArray.length; i++) {
+
+            console.log(nutritionPostArray[i]);
+            postData[i] = nutritionPostArray[i];
+
+        }
+
+        console.log(postData);
+
+        $.post("api/nutrition", postData).then(function (data) {
+            console.log(data);
+        });
+
+    })
 
 
 

@@ -22,10 +22,15 @@ module.exports = function (app) {
 
     app.post("/api/workouts", function (req, res) {
         // post to workouts table in mysql
+        console.log(req.body);
+        res.send('POST');
     });
+
 
     app.post("/api/nutrition", function (req, res) {
         // post to nutrition table in mysql
+        console.log(req.body);
+        res.send('POST');
     });
 
 
