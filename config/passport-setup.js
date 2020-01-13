@@ -4,8 +4,20 @@ const GoogleStrat = require('passport-google-oauth20');
 const keys = require('./keys');
 const db = require('../models');
 
+//serialize user id
 passport.serializeUser((user, done) => {
-    done(null, db.user.id);
+
+    done(null, user);
+});
+
+//deserialize user id 
+passport.deserializeUser((id, done) => {
+    console.log(id.id);
+
+    db.user.findByPk(id.id).then((user) => {
+
+        done(null, user);
+    });
 });
 
 
