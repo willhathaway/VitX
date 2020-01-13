@@ -6,25 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery.js"></script> 
+    <script src="https://code.jquery.com/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- <script type="javascript" src="../javascript/app.js"></script> -->
 </head>
 
 <body>
-    <div id="data">
-    </div>
+
     <div>
-
-        <form id="post">
-            <input type="text" name="input1">
-            <input type="text" name="input2">
-            <input type="text" name="input3">
+        <h4>Search exersize</h4>
+        <form id="search-exersizes">
+            <input type="text" name="inputW">
         </form>
+        <button id="workouts-btn">search exersize</button>
 
+        <h4>Search food</h4>
+        <form id="search-nutrition">
+            <input type="text" name="inputN">
+        </form>
+        <button id="nutrition-btn">search food</button>
+        <br>
+        <h4>View user data</h4>
         <button id="view-btn">view data</button>
-        <button id="nutrition-btn">add food</button>
-        <button id="workouts-btn">add workout</button>
+        <br>
+
+        <h4>Response data</h4>
+        <div id="data">
+        </div>
+        <br>
+        <form id="post-exersizes">
+            <div id="exersizes-post"></div>
+        </form>
+        <form id="post-nutrition">
+            <div id="nutrition-post"></div>
+        </form>
+        <button id="add-exersizes">add exersizes</button>
+        <button id="add-nutrition">add nutrition</button>
 
     </div>
     <script src="../javascript/app.js"></script>

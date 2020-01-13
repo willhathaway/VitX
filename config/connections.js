@@ -9,10 +9,10 @@ var mysql = require("mysql");
 const source = {
   localhost: {
     host: "localhost",
-    port: 3306,
+    port: 1542,
     user: "root",
     password: "password",
-    database: "db"
+    database: "blazeDB"
   }
 };
 
