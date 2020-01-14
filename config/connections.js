@@ -3,19 +3,40 @@
 // *********************************************************************************
 
 // Requiring mysql package
-var mysql = require("mysql");
+const mysql = require("mysql2");
+
+const Sequelize = require("sequelize");
+
+const NutritionModel = require("../models/Nutrition");
+
+const WorkoutsModel = require("../models/Workouts");
 
 // Setting up our connection information
-const source = {
-  localhost: {
-    host: "localhost",
-    port: 1542,
-    user: "root",
-    password: "password",
-    database: "blazeDB"
-  }
-};
 
+// const source = {
+//   localhost: {
+//     host: "localhost",
+//     port: 1542,
+//     user: "root",
+//     password: "password",
+//     database: "blazeDB"
+//   }
+// };
+
+const sequelize = new Sequelize('blazeDB', 'root', 'password', {
+    host: 'localhost',
+    dialect: 'mysql',
+    pool: {
+      max: 10,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
+  });
+
+const Nutrition = NutritionModel(sequelize, Sequelize);
+
+const Workouts = WorkoutsModel(sequelize, Sequelize);
 
 // Creating our connection
 const connection = mysql.createConnection(source.localhost);

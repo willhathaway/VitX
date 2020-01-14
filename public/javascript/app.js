@@ -105,7 +105,6 @@ $(document).ready(function () {
 
         });
 
-
     })
 
     let nutritionPostArray = [];
@@ -125,9 +124,7 @@ $(document).ready(function () {
             }
         }
 
-        
-
-        for (let i = 0; i < nutritionPostArray.length; i++) {     
+        for (let i = 0; i < nutritionPostArray.length; i++) {
             let postNutrition = $("<p>");
             $(postNutrition).html(foodOptions[i].food.label);
             $("#nutrition-topost").append(postNutrition);
@@ -140,18 +137,10 @@ $(document).ready(function () {
 
     $("#post-exersizes").on("click", function () {
 
-        let postData = {};
 
-        for (let i = 0; i < exersizePostArray.length; i++) {
+        console.log(exersizePostArray)
 
-            console.log(exersizePostArray[i]);
-            postData[i] = exersizePostArray[i];
-
-        }
-
-        console.log(postData)
-
-        $.post("api/workouts", postData).then(function (data) {
+        $.post("api/workouts", exersizePostArray).then(function (data) {
             console.log(data);
         })
 
@@ -159,19 +148,12 @@ $(document).ready(function () {
 
     $("#post-nutrition").on("click", function () {
 
-        let postData = {};
 
-        for (let i = 0; i < nutritionPostArray.length; i++) {
+        console.log(nutritionPostArray);
 
-            console.log(nutritionPostArray[i]);
-            postData[i] = nutritionPostArray[i];
-
-        }
-
-        console.log(postData);
-
-        $.post("api/nutrition", postData).then(function (data) {
-            console.log(data);
+        $.post("api/nutrition", nutritionPostArray).then(function (data) {
+            console.log('THIS IS THE DATA', data);
+            console.log('THIS IS THE DATA type', typeof data);
         });
 
     })
