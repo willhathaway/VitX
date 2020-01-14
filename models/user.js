@@ -6,6 +6,6 @@ module.exports = function (sequelize, DataTypes) {
         {
             timestamps: false, // removes createdAt, updatedAt
             // defaultPrimaryKey: false // removes id
-        })
+        });
     return user;
-}
+};
