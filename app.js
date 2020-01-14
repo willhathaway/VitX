@@ -2,6 +2,7 @@
 let express = require('express');
 const app = express();
 const authRoutes = require('./routes/auth-routes');
+const profileRoutes = require('./routes/profile-routes');
 const passportSetup = require('./config/passport-setup.js');
 const db = require('./models');
 const cookieSession = require('cookie-session');
@@ -24,6 +25,7 @@ app.use(passport.session());
 
 //set up routes
 app.use('/auth', authRoutes)
+app.use('/profile', profileRoutes)
 
 //create home route
 app.get('/', (req, res) => {
