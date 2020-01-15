@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../../views/css/landingPage.scss"
+    ],
+    "names": [],
+    "file": "landingPage.min.css"
+}
