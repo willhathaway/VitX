@@ -239,10 +239,14 @@ $(document).on("click", ".nutrition", function () {
 
 $("#post-exersizes").on("click", function () {
 
-
     console.log(exersizePostArray)
 
-    $.post("api/workouts", exersizePostArray).then(function (data) {
+
+    $.ajax({
+        url: '/api/workouts',
+        method: 'POST', 
+        data: {exersizePostArray}
+    }).then(function (data) {
         console.log(data);
     })
 
@@ -250,13 +254,13 @@ $("#post-exersizes").on("click", function () {
 
 $("#post-nutrition").on("click", function () {
 
-
-    console.log(nutritionPostArray);
-
-    $.post("api/nutrition", nutritionPostArray).then(function (data) {
-        console.log('THIS IS THE DATA', data);
-        console.log('THIS IS THE DATA type', typeof data);
-    });
+    $.ajax({
+        url: '/api/nutrition',
+        method: 'POST', 
+        data: {exersizePostArray}
+    }).then(function (data) {
+        console.log(data);
+    })
 
 })
 
