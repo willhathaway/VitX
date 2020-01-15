@@ -27,7 +27,7 @@ module.exports = function (app) {
     app.post("/api/workouts", function (req, res) {
 
         // post to workouts table in mysql
-
+        
         console.log(req.body);
         res.send(req.body);
 
