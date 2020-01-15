@@ -1,7 +1,7 @@
 //create instance of express router using Router method
 const router = require('express').Router();
 const passport = require('passport');
-let db = require('../models/user');
+let db = require('../../models/user');
 
 //create login route
 router.get('/login', (req, res) => {
