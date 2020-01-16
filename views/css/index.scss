@@ -36,6 +36,8 @@ $color2: white;
 $color3: red;
 $color4: green;
 $color5: blue;
+$color6: yellow;
+
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Section B: Standard Color Gradients
@@ -80,6 +82,18 @@ background: linear-gradient(135deg, #434343 0%, #000000 100%);
 
 
 h1 {
+  color: $color2; 
+  font-family: $GF1;
+
+};
+
+h2 {
+  color: $color3; 
+  font-family: $GF1;
+
+};
+
+h3 {
   color: $color3; 
   font-family: $GF1;
 
@@ -90,6 +104,28 @@ h4 {
   color: $color5;
   font-family: $GF1;
 };
+
+h5 {
+  
+  font-family: $GF1;
+};
+
+p {
+  color: $color2; 
+  font-family: $GF1;
+
+};
+
+
+#button {
+  margin-left: 100px;
+  
+}
+
+#box1 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
 
 
 // @media () {
