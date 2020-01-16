@@ -71,6 +71,13 @@ $GF1: 'Girassol', cursive;
 // ::: === ::: === ::: === ::: === ::: === ::: ===
 // Actual Code for page ( :: Below :: ) 
 
+html, body {
+  margin: -10;
+  padding: -10;
+}
+
+
+
 body {
   background-color: $color1; 
   
@@ -107,12 +114,12 @@ h4 {
 
 h5 {
   
-  font-family: $GF1;
+  
 };
 
 p {
   color: $color2; 
-  font-family: $GF1;
+  // font-family: $GF1;
 
 };
 
@@ -125,6 +132,20 @@ p {
 #box1 {
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
 box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#authentication {
+  margin-bottom: 200px;
+}
+
+#log {
+  -webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+}
+
+#button2 {
+  margin-left: 150px;
 }
 
 

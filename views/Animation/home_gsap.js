@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   //WITH Timelines (cleaner, more versatile)
-  var tl = gsap.timeline({ repeat: 0, repeatDelay: 0 });
+  var tl = gsap.timeline({ delay: 0.5, repeat: 0, repeatDelay: 0 });
   tl.from("#box1", { opacity: 0, x: 1000, duration: .3 });
   tl.from("#box2", { opacity: 0, x: 1000, duration: .3 });
   tl.from("#box3", { opacity: 0, x: 1000, duration: .3 });
@@ -29,6 +29,20 @@ document.addEventListener("DOMContentLoaded", function () {
   tl.from("#box5", { opacity: 0, x: 1000, duration: .3 });
   tl.from("#box6", { opacity: 0, x: 1000, duration: .3 });
   tl.from("#box7", { opacity: 0, x: 1000, duration: .3 });
+
+
+  gsap.from("#boxTest", {
+    duration: 10.7,
+    opacity: 0.01,
+    scale: 0.01,
+    // delay: 10.7,
+    // rotation: 360,
+    x: -1000,
+    y: 0,
+    ease: "back.out(1.7)",
+
+
+  });
 
 
 
