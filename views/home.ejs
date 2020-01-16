@@ -67,11 +67,11 @@
     <div>
 
         <div>
-            <h4>Search exersize</h4>
-            <form id="search-exersizes">
+            <h4>Search exercise</h4>
+            <form id="search-exercises">
                 <input type="text" name="inputW">
             </form>
-            <button id="workouts-btn">search exersize</button>
+            <button id="workouts-btn">search exercise</button>
     
             <h4>Search food</h4>
             <form id="search-nutrition">
@@ -88,14 +88,14 @@
             </div>
             <br>
     
-            <form id="exersizes-form">
-                <div id="exersizes-topost"></div>
+            <form id="exercises-form">
+                <div id="exercises-topost"></div>
             </form>
             <form id="nutrition-form">
                 <div id="nutrition-topost"></div>
             </form>
 
-            <button id="post-exersizes">add exersizes</button>
+            <button id="post-exercises">add exercises</button>
             <button id="post-nutrition">add nutrition</button>
     
         </div>
@@ -107,18 +107,16 @@ console.log("javascript loaded")
 
 // for searching:
 
-// fitbit API
-
 $("#workouts-btn").on("click", function () {
 
-    let exersize = $("#search-exersizes")[0].elements[0].value;
+    let exercise = $("#search-exercises")[0].elements[0].value;
 
-    console.log(exersize);
+    console.log(exercise);
 
-    $.get("api/exersizes", function (data) {
+    $.get("api/exercises", function (data) {
         let results = [];
         for (let i = 0; i < data.length; i++) {
-            if (data[i].name.includes(exersize)) {
+            if (data[i].name.includes(exercise)) {
                 results.push(data[i]);
             }
         }
@@ -128,7 +126,7 @@ $("#workouts-btn").on("click", function () {
 
             let options = $("<button id=" + results[i].id + ">");
             options.html(results[i].name);
-            options.attr("class", "exersize")
+            options.attr("class", "exercise")
             options.appendTo($("#data"));
 
         }
@@ -136,7 +134,6 @@ $("#workouts-btn").on("click", function () {
     });
 
 })
-
 
 // edemam API
 
@@ -181,29 +178,33 @@ $("#nutrition-btn").on("click", function () {
 
 // for adding items to submit to server:
 
-let exersizePostArray = [];
+let exercisePostArray = [];
 
-$(document).on("click", ".exersize", function () {
+$(document).on("click", ".exercise", function () {
 
-    $("#exersizes-topost").html("");
+    $("#exercises-topost").html("");
 
-    console.log("add exersize to post form");
+    console.log("add exercise to post form");
 
     let thisID = this.id;
 
-    $.get("api/exersizes", function (data) {
+    $.get("api/exercises", function (data) {
 
         for (let i = 0; i < data.length; i++) {
 
             if (data[i].id === thisID) {
-                exersizePostArray.push(data[i]);
+                exercisePostArray.push(data[i]);
             }
         }
 
-        for (let i = 0; i < exersizePostArray.length; i++) {
-            let postExersize = $("<p>");
-            $(postExersize).html(exersizePostArray[i].name);
-            $("#exersizes-topost").append(postExersize);
+        for (let i = 0; i < exercisePostArray.length; i++) {
+            let postexerciseDiv = $("<div>");
+            let postexercise = $("<p>");
+            let multiplier = $("<input type='number' name='multiplier'>");
+            $(postexercise).html(exercisePostArray[i].name);
+            $(postexercise).appendTo(postexerciseDiv);
+            $(multiplier).appendTo(postexerciseDiv);
+            $("#exercises-topost").append(postexerciseDiv);
         }
 
     });
@@ -238,16 +239,18 @@ $(document).on("click", ".nutrition", function () {
 
 // for posting to server:
 
-$("#post-exersizes").on("click", function () {
+$("#post-exercises").on("click", function () {
 
-    console.log(exersizePostArray)
+    console.log(exercisePostArray)
+
+    
 
 
     $.ajax({
         url: '/api/workouts',
         method: 'POST', 
         contentType: 'application/json',
-        data: JSON.stringify({data: exersizePostArray})
+        data: JSON.stringify({data: exercisePostArray})
     }).then(function (data) {
         console.log(data);
     })

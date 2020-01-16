@@ -1,4 +1,4 @@
-exersizes = [
+exercises = [
     {
         name: "running 10mph",
         calsPerRep: -540,
@@ -85,4 +85,4 @@ exersizes = [
     }
 ]
 
-module.exports = exersizes;
+module.exports = exercises;

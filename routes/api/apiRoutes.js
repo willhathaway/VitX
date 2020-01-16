@@ -2,7 +2,7 @@
 
 const sequelize = require("../../config/connections");
 
-const exersizes = require('../../data/exersizes');
+const exercises = require('../../data/exercises');
 
 const Workouts = sequelize.import("../../models/Workouts.js");
 
@@ -16,8 +16,8 @@ const profile = require("../auth/profile-routes");
 
 module.exports = function (app) {
 
-    app.get("/api/exersizes", function (req, res) {
-        res.json(exersizes);
+    app.get("/api/exercises", function (req, res) {
+        res.json(exercises);
     });
 
     app.get("/api/workouts", function (req, res) {
