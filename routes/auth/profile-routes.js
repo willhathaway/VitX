@@ -23,4 +23,4 @@ router.get('/', authCheck, (req, res) => {
 
 
 //export router
-module.exports = router, userID;
+module.exports = router;
