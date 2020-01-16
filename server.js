@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth/auth-routes');
 const profileRoutes = require('./routes/auth/profile-routes');
 const passportSetup = require('./config/passport-setup.js');
-const db = require('./models');
+const models = require('./models');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
 const passport = require('passport');
@@ -44,7 +44,7 @@ app.use(cookieSession({
     keys: [keys.session.cookieKey]
 }));
 
-db.sequelize.sync().then(() => {
+models.sequelize.sync().then(() => {
     app.listen(PORT, () => console.log('server started on port ' + PORT));
 
 })

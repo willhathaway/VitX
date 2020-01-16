@@ -94,6 +94,7 @@
             <form id="nutrition-form">
                 <div id="nutrition-topost"></div>
             </form>
+
             <button id="post-exersizes">add exersizes</button>
             <button id="post-nutrition">add nutrition</button>
     
@@ -222,7 +223,7 @@ $(document).on("click", ".nutrition", function () {
     for (let i = 0; i < foodOptions.length; i++) {
 
         if (foodOptions[i].food.foodId === thisID) {
-            nutritionPostArray.push(foodOptions[i]);
+            nutritionPostArray.push(foodOptions[i].food);
         }
     }
 
@@ -255,10 +256,13 @@ $("#post-exersizes").on("click", function () {
 
 $("#post-nutrition").on("click", function () {
 
+    console.log(nutritionPostArray);
+
     $.ajax({
         url: '/api/nutrition',
         method: 'POST', 
-        //data: JSON.stringify(rc)
+        contentType: "application/json",
+        data: JSON.stringify({data: nutritionPostArray})
     }).then(function (data) {
         console.log(data);
     })
