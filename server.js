@@ -60,7 +60,7 @@ app.use('/profile', profileRoutes)
 //create home route
 app.get('/', (req, res) => {
 
-    res.render('home');
+    res.render('profile');
 });
 
 
