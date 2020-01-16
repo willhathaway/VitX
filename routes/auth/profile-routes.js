@@ -1,6 +1,8 @@
 //dependencies 
 const router = require('express').Router();
 
+let userID;
+
 //check if user is logged in 
 const authCheck = (req, res, next) => {
     if (!req.user) {
@@ -15,10 +17,10 @@ const authCheck = (req, res, next) => {
 //base rout for profile
 router.get('/', authCheck, (req, res) => {
     res.render('../views/profile.ejs', { user: req.user.user_name, id: req.user.id });
-    console.log(req.user.user_name);
-
+    console.log('username: ' + req.user.user_name);
+    userID = req.user.user_name;
 })
 
 
 //export router
-module.exports = router;
+module.exports = router, userID;

@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
         date: DataTypes.DATEONLY,
         name: DataTypes.STRING,
         calories: DataTypes.INTEGER,
-        multiplier: DataTypes.INTEGER
+        multiplier: DataTypes.INTEGER,
+        totalCalories: DataTypes.INTEGER
     }, {
         timestamps: false
     }

@@ -245,7 +245,8 @@ $("#post-exersizes").on("click", function () {
     $.ajax({
         url: '/api/workouts',
         method: 'POST', 
-        data: {exersizePostArray}
+        contentType: 'application/json',
+        data: JSON.stringify({data: exersizePostArray})
     }).then(function (data) {
         console.log(data);
     })
@@ -257,14 +258,12 @@ $("#post-nutrition").on("click", function () {
     $.ajax({
         url: '/api/nutrition',
         method: 'POST', 
-        data: {exersizePostArray}
+        //data: JSON.stringify(rc)
     }).then(function (data) {
         console.log(data);
     })
 
 })
-
-
 
 // for viewing saved user data:
 
@@ -313,35 +312,7 @@ $("#view-btn").on("click", function (event) {
     });
 });
 
-// for posting:
 
-// $("#nutrition-btn").on("click", function (event) {
-
-//     event.preventDefault();
-
-//     console.log("nutrition");
-
-//     let data = $("#post");
-
-//     console.log(data);
-
-//     // post data to nutrition
-
-// });
-
-// $("#workouts-btn").on("click", function (event) {
-
-//     event.preventDefault();
-
-//     console.log("workouts");
-
-//     let data = $("#post");
-
-//     console.log(data);
-
-//     // post data to workouts
-
-// });
 
 });
         

@@ -8,6 +8,8 @@ const db = require("../../models");
 
 const moment = require("moment");
 
+const profile = require("../auth/profile-routes");
+
 // const router = express.Router();
 
 module.exports = function (app) {
@@ -28,8 +30,25 @@ module.exports = function (app) {
 
         // post to workouts table in mysql
         
-        console.log(req.body);
+        console.log(req.body.data);
+
         res.send(req.body);
+
+        db.Workouts.createBulk({
+
+            userID: '',
+            date: moment(),
+            name: req.body.name,
+            calories: req.body.calories,
+            multiplier: req.body.multiplier,
+            totalCalories: req.body.calories * req.body.multiplier
+
+        }).then(function(results) {
+            console.log(results)
+            res.end();
+        })
+
+    
 
 
     });
@@ -37,27 +56,22 @@ module.exports = function (app) {
     app.post("/api/nutrition", function (req, res) {
 
         // post to nutrition table in mysql
-        console.log(req[0].food);
 
+        console.log(req.body);
 
-        for (let i = 0; i < req.length; i++) {
-            res.send(req[i].food);
-        }
-
-        
 
         // res.body contains one object differentiated by keys
 
         // i need to break the object up based on the key, and submit each object individually to the database
 
 
-        // db.Nutrition.create({
-        //     user = 'Will',
+        // db.Nutrition.createBulk({
+        //     userID = profile.userID,
         //     date = moment(),
-        //     id = 0,
-        //     name = req.body,
-        //     calories = calories,
-        //     multiplier = multiplier
+        //     name = 'Will',
+        //     calories = 0,
+        //     multiplier = multiplier,
+        //     totalCalories: req.body.calories * req.body.multiplier
         // }).then(function(dbNutrition) {
         //     res.JSON(dbNutrition);
         // })
