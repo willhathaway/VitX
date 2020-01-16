@@ -67,284 +67,321 @@
     <div>
 
         <div>
-            <h4>Search exersize</h4>
-            <form id="search-exersizes">
+            <h4>Search exercise</h4>
+            <form id="search-exercises">
                 <input type="text" name="inputW">
             </form>
-            <button id="workouts-btn">search exersize</button>
-    
+            <button id="workouts-btn">search exercise</button>
+
             <h4>Search food</h4>
             <form id="search-nutrition">
-                <input type="text" name="inputN">
+                <input type="text" name="inputN" id="foodSearch">
             </form>
             <button id="nutrition-btn">search food</button>
             <br>
             <h4>View user data</h4>
-            <button id="view-btn">view data</button>
+            <button id="view-workouts-btn">view workouts data</button>
+            <button id="view-nutrition-btn">view nutrition data</button>
             <br>
-    
+
             <h4>Response data</h4>
             <div id="data">
             </div>
             <br>
-    
-            <form id="exersizes-form">
-                <div id="exersizes-topost"></div>
+
+            <form id="exercises-form">
+                <div id="exercises-topost"></div>
             </form>
             <form id="nutrition-form">
                 <div id="nutrition-topost"></div>
             </form>
-            <button id="post-exersizes">add exersizes</button>
+
+            <button id="post-exercises">add exercises</button>
             <button id="post-nutrition">add nutrition</button>
-    
+
         </div>
         <script>
-        
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-console.log("javascript loaded")
+                console.log("javascript loaded")
 
-// for searching:
+                // for searching:
 
-// fitbit API
+                $("#workouts-btn").on("click", function () {
 
-$("#workouts-btn").on("click", function () {
+                    let exercise = $("#search-exercises")[0].elements[0].value;
 
-    let exersize = $("#search-exersizes")[0].elements[0].value;
+                    console.log(exercise);
 
-    console.log(exersize);
+                    $.get("api/exercises", function (data) {
+                        let results = [];
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].name.includes(exercise)) {
+                                results.push(data[i]);
+                            }
+                        }
+                        console.log(results);
 
-    $.get("api/exersizes", function (data) {
-        let results = [];
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].name.includes(exersize)) {
-                results.push(data[i]);
-            }
-        }
-        console.log(results);
+                        for (let i = 0; i < results.length; i++) {
 
-        for (let i = 0; i < results.length; i++) {
+                            let options = $("<button id=" + results[i].exerciseID + ">");
+                            options.html(results[i].name);
+                            options.attr("class", "exercise")
+                            options.appendTo($("#data"));
 
-            let options = $("<button id=" + results[i].id + ">");
-            options.html(results[i].name);
-            options.attr("class", "exersize")
-            options.appendTo($("#data"));
+                        }
 
-        }
+                    });
 
-    });
+                })
 
-})
+                // edemam API
 
+                let foodOptions = [];
 
-// edemam API
+                $("#nutrition-btn").on("click", function () {
 
-let foodOptions = [];
+                    let food = $('#foodSearch').val();
 
-$("#nutrition-btn").on("click", function () {
+                    let app_id = "319d5cf3";
 
-    let food = "apple";
+                    let app_key = "a6b7b2b30443063fa2630ff0dbc8f735"
 
-    let app_id = "319d5cf3";
+                    let queryURL = "https://api.edamam.com/api/food-database/parser?limit=5&app_id=" +
+                        app_id + "&app_key=" + app_key + "&ingr=" + food;
 
-    let app_key = "a6b7b2b30443063fa2630ff0dbc8f735"
+                    $.ajax({
+                            url: queryURL,
+                            method: "GET"
+                        })
 
-    let queryURL = "https://api.edamam.com/api/food-database/parser?limit=5&app_id=" + app_id + "&app_key=" + app_key + "&ingr=" + food;
+                        // Function is .then() called with the response object:
 
-    $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
+                        .then(function (response) {
 
-        // Function is .then() called with the response object:
+                            // Console logs the response to see what the object looks like, how to retrieve information:
 
-        .then(function (response) {
+                            console.log(response);
 
-            // Console logs the response to see what the object looks like, how to retrieve information:
+                            for (let i = 0; i < response.hints.length; i++) {
+                                foodOptions.push(response.hints[i]);
+                                let options = $("<button id=" + response.hints[i].food.label + ">");
+                                options.html(response.hints[i].food.label);
+                                options.attr("class", "nutrition");
+                                options.attr("id", response.hints[i].food.foodId)
+                                options.appendTo($("#data"));
 
-            console.log(response);
+                            }
 
-            for (let i = 0; i < response.hints.length; i++) {
-                foodOptions.push(response.hints[i]);
-                let options = $("<button id=" + response.hints[i].food.label + ">");
-                options.html(response.hints[i].food.label);
-                options.attr("class", "nutrition");
-                options.attr("id", response.hints[i].food.foodId)
-                options.appendTo($("#data"));
+                        });
 
-            }
+                });
 
-        });
+                // for adding items to submit to server:
 
-});
+                let exercisePostArray = [];
 
-// for adding items to submit to server:
+                $(document).on("click", ".exercise", function () {
 
-let exersizePostArray = [];
+                    $("#exercises-topost").html("");
 
-$(document).on("click", ".exersize", function () {
+                    console.log("add exercise to post form");
 
-    $("#exersizes-topost").html("");
+                    let thisID = this.id;
 
-    console.log("add exersize to post form");
+                    console.log(this);
 
-    let thisID = this.id;
+                    $.get("api/exercises", function (data) {
 
-    $.get("api/exersizes", function (data) {
+                        for (let i = 0; i < data.length; i++) {
 
-        for (let i = 0; i < data.length; i++) {
+                            if (data[i].exerciseID === thisID) {
+                                exercisePostArray.push(data[i]);
+                            }
+                        }
 
-            if (data[i].id === thisID) {
-                exersizePostArray.push(data[i]);
-            }
-        }
+                        for (let i = 0; i < exercisePostArray.length; i++) {
+                            let postExerciseDiv = $("<div>");
+                            let postExercise = $("<p>");
+                            let multiplier = $("<input type='number' name='multiplier'>");
+                            $(multiplier).attr('id', 'multiplier_' + i);
+                            $(postExercise).html(exercisePostArray[i].name);
+                            $(postExercise).appendTo(postExerciseDiv);
+                            $(multiplier).appendTo(postExerciseDiv);
+                            $("#exercises-topost").append(postExerciseDiv);
+                        }
 
-        for (let i = 0; i < exersizePostArray.length; i++) {
-            let postExersize = $("<p>");
-            $(postExersize).html(exersizePostArray[i].name);
-            $("#exersizes-topost").append(postExersize);
-        }
+                    });
 
-    });
+                })
 
-})
+                let nutritionPostArray = [];
 
-let nutritionPostArray = [];
+                $(document).on("click", ".nutrition", function () {
 
-$(document).on("click", ".nutrition", function () {
+                    $("#nutrition-topost").html("");
 
-    $("#nutrition-topost").html("");
+                    console.log("add nutrition to post form");
 
-    console.log("add nutrition to post form");
+                    let thisID = this.id;
 
-    let thisID = this.id;
+                    for (let i = 0; i < foodOptions.length; i++) {
 
-    for (let i = 0; i < foodOptions.length; i++) {
+                        if (foodOptions[i].food.foodId === thisID) {
+                            nutritionPostArray.push(foodOptions[i].food);
+                        }
+                    }
 
-        if (foodOptions[i].food.foodId === thisID) {
-            nutritionPostArray.push(foodOptions[i]);
-        }
-    }
+                    for (let i = 0; i < nutritionPostArray.length; i++) {
+                        let postNutritionDiv = $("<div>");
+                        let postNutrition = $("<p>");
+                        let multiplier = $("<input type='number' name='multiplier'>");
+                        $(multiplier).attr('id', 'multiplier_' + i);
+                        $(postNutrition).html(nutritionPostArray[i].label);
+                        $(postNutrition).appendTo(postNutritionDiv);
+                        $(multiplier).appendTo(postNutritionDiv);
+                        $("#exercises-topost").append(postNutritionDiv);
+                    }
 
-    for (let i = 0; i < nutritionPostArray.length; i++) {
-        let postNutrition = $("<p>");
-        $(postNutrition).html(foodOptions[i].food.label);
-        $("#nutrition-topost").append(postNutrition);
-    }
+                })
 
-})
 
+                // for posting to server:
 
-// for posting to server:
+                $("#post-exercises").on("click", function () {
 
-$("#post-exersizes").on("click", function () {
+                    console.log(exercisePostArray)
 
-    console.log(exersizePostArray)
+                    for (let i = 0; i < exercisePostArray.length; i++) {
 
+                        let multiplierInput = $('#multiplier_' + i).val();
 
-    $.ajax({
-        url: '/api/workouts',
-        method: 'POST', 
-        data: {exersizePostArray}
-    }).then(function (data) {
-        console.log(data);
-    })
+                        exercisePostArray[i].multiplier = multiplierInput;
+                        console.log(exercisePostArray[i]);
+                    }
 
-})
+                    $.ajax({
+                        url: '/api/workouts',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            data: exercisePostArray
+                        })
+                    }).then(function (data) {
+                        console.log(data);
+                    })
 
-$("#post-nutrition").on("click", function () {
+                })
 
-    $.ajax({
-        url: '/api/nutrition',
-        method: 'POST', 
-        data: {exersizePostArray}
-    }).then(function (data) {
-        console.log(data);
-    })
+                $("#post-nutrition").on("click", function () {
 
-})
+                    console.log(nutritionPostArray);
 
+                    for (let i = 0; i < nutritionPostArray.length; i++) {
 
+                        let multiplierInput = $('#multiplier_' + i).val();
 
-// for viewing saved user data:
+                        nutritionPostArray[i].multiplier = multiplierInput;
+                        console.log(nutritionPostArray[i]);
 
+                    }
 
-$("#view-btn").on("click", function (event) {
+                    $.ajax({
+                        url: '/api/nutrition',
+                        method: 'POST',
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            data: nutritionPostArray
+                        })
+                    }).then(function (data) {
+                        console.log(data);
+                    })
 
-    event.preventDefault();
+                })
 
-    console.log("view");
+                // for viewing saved user data:
 
-    $.get("api/workouts", function (data) {
+                $("#view-workouts-btn").on("click", function (event) {
 
-        // for each character that our server sends us back
-        for (let i = 0; i < data.length; i++) {
-            // create a parent div for the oncoming elements
-            let workoutData = $("<div>");
-            // add a class to this div
-            workoutData.addClass("workoutData");
-            // add an id to the well to mark 
-            workoutData.attr("id", "workoutData" + i);
-            // append the div to data div
-            $("#data").append(workoutData);
+                    event.preventDefault();
 
-            // get data from workouts data
+                    console.log("view");
 
-        }
-    });
+                    $.get("api/workouts", function (data) {
 
-    $.get("api/nutrition", function (data) {
+                        console.log(data)
 
-        // for each food that our server sends us back
+                        // for each character that our server sends us back
+                        for (let i = 0; i < data.length; i++) {
+                            // create a parent div for the oncoming elements
+                            let workoutData = $("<div>");
+                            // add a class to this div
+                            workoutData.addClass("workoutData");
+                            // add an id to the well to mark 
+                            workoutData.attr("id", "workoutData" + i);
 
-        for (let i = 0; i < data.length; i++) {
-            // create a parent div for the oncoming elements
-            let nutritionData = $("<div>");
-            // add a class to this div
-            nutritionData.addClass("nutritionData");
-            // add an id to the well to mark 
-            nutritionData.attr("id", "nutritionData" + i);
-            // append the div to data div
-            $("#data").append(nutritionData);
+                            let WOName = $('<p>');
+                            let WOCals = $('<p>');
+                            let WODate = $('<p>');
 
-            // get data from nutrition table
+                            WOName.html(data[i].name);
+                            WOCals.html(data[i].calories);
+                            WODate.html(data[i].date);
 
-        }
-    });
-});
+                            WOName.appendTo(workoutData);
+                            WOCals.appendTo(workoutData);
+                            WODate.appendTo(workoutData);
 
-// for posting:
 
-// $("#nutrition-btn").on("click", function (event) {
+                            // append the div to data div
+                            $("#data").append(workoutData);
 
-//     event.preventDefault();
+                            // get data from workouts data
 
-//     console.log("nutrition");
+                        }
+                    });
+                })
 
-//     let data = $("#post");
+                $("#view-nutrition-btn").on("click", function (event) {
 
-//     console.log(data);
+                    $.get("api/nutrition", function (data) {
 
-//     // post data to nutrition
+                        console.log(data)
 
-// });
+                        // for each food that our server sends us back
 
-// $("#workouts-btn").on("click", function (event) {
+                        for (let i = 0; i < data.length; i++) {
+                            // create a parent div for the oncoming elements
+                            let nutritionData = $("<div>");
+                            // add a class to this div
+                            nutritionData.addClass("nutritionData");
+                            // add an id to the well to mark 
+                            nutritionData.attr("id", "nutritionData" + i);
 
-//     event.preventDefault();
+                            let foodName = $('<p>');
+                            let foodCals = $('<p>');
+                            let foodDate = $('<p>');
 
-//     console.log("workouts");
+                            foodName.html(data[i].name);
+                            foodCals.html(data[i].calories);
+                            foodDate.html(data[i].date);
 
-//     let data = $("#post");
+                            foodName.appendTo(nutritionData);
+                            foodCals.appendTo(nutritionData);
+                            foodDate.appendTo(nutritionData);
 
-//     console.log(data);
+                            // append the div to data div
+                            $("#data").append(nutritionData);
 
-//     // post data to workouts
+                            // get data from nutrition table
 
-// });
+                        }
+                    });
+                });
 
-});
-        
+
+
+            });
         </script>
 
     </div>

@@ -2,7 +2,7 @@
 
 const express = require('express');
 const path = require('path');
-const exersizes = require('./data/exersizes');
+const exercises = require('./data/exercises');
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth/auth-routes');
 const profileRoutes = require('./routes/auth/profile-routes');
 const passportSetup = require('./config/passport-setup.js');
-const db = require('./models');
+const models = require('./models');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
 const passport = require('passport');
@@ -28,9 +28,9 @@ app.use(bodyParser.json());
 // set static folder (use is keyword for middleware):
 app.use(express.static(path.join(__dirname, 'view')))
 
-//app.use('/api/control', require(exersizes))
+//app.use('/api/control', require(exercises))
 
-//console.log(exersizes);
+//console.log(exercises);
 
 require("./routes/api/apiRoutes")(app);
 // require("./routes/html/htmlRoutes")(app);
@@ -44,7 +44,7 @@ app.use(cookieSession({
     keys: [keys.session.cookieKey]
 }));
 
-db.sequelize.sync().then(() => {
+models.sequelize.sync().then(() => {
     app.listen(PORT, () => console.log('server started on port ' + PORT));
 
 })
