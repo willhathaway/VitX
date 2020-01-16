@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../../views/css/data_home.scss"
+    ],
+    "names": [],
+    "file": "data_home.min.css"
+}
