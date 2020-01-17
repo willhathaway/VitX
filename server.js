@@ -5,6 +5,7 @@ const path = require('path');
 const exercises = require('./data/exercises');
 const app = express();
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 //dependencies auth
 
