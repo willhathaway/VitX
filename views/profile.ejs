@@ -27,10 +27,10 @@
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-    </script>
+        </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   Head Section A.4: Projec CSS files using SASS
@@ -48,16 +48,9 @@
 
 <body>
 
-    <nav>
-        <ul>
-            <li><a href="/auth/logout">Logout</a></li>
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="/">Homepage</a></li>
-        </ul>
-    </nav>
     <header>
         <h1>Welcome to your profile, <%= user %>!</h1>
-        <!-- <h2> Your id is: <%= id%>.</h2> -->
+        <h2 id="userID"> Your id is: <%= id%>.</h2>
 
     </header>
     <main>
@@ -332,6 +325,17 @@
                         </div>
                     </div>
 
+                    <div>
+
+                        <nav>
+
+                            <button class="btn btn-dark">
+                                <a href="/auth/logout">Logout</a>
+                            </button>
+                        </nav>
+
+                    </div>
+
                     <!-- app container end div-->
                 </div>
 
@@ -424,14 +428,14 @@
         </script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-        </script>
+            </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-        </script>
+            </script>
         <!-- jQuery Custom Scroller CDN -->
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
-        </script>
+            </script>
 
 
 
@@ -439,43 +443,10 @@
 
     <div>
 
-        <div>
-            <h4>Search exercise</h4>
-            <form id="search-exercises">
-                <input type="text" name="inputW">
-            </form>
-            <button id="workouts-btn">search exercise</button>
 
-            <h4>Search food</h4>
-            <form id="search-nutrition">
-                <input type="text" name="inputN" id="foodSearch">
-            </form>
-            <button id="nutrition-btn">search food</button>
-            <br>
-
-            <h4>View user data</h4>
-            <button id="view-workouts-btn">view workouts data</button>
-            <button id="view-nutrition-btn">view nutrition data</button>
-            <br>
-
-            <h4>Response data</h4>
-            <div id="data">
-            </div>
-            <br>
-
-            <form id="exercises-form">
-                <div id="exercises-topost"></div>
-            </form>
-            <form id="nutrition-form">
-                <div id="nutrition-topost"></div>
-            </form>
-
-            <button id="post-exercises">add exercises</button>
-            <button id="post-nutrition">add nutrition</button>
-
-        </div>
 
         <script>
+
             $(document).ready(function () {
 
                 console.log("javascript loaded")
@@ -526,9 +497,9 @@
                         app_id + "&app_key=" + app_key + "&ingr=" + food;
 
                     $.ajax({
-                            url: queryURL,
-                            method: "GET"
-                        })
+                        url: queryURL,
+                        method: "GET"
+                    })
 
                         // Function is .then() called with the response object:
 
@@ -629,8 +600,19 @@
 
                     for (let i = 0; i < exercisePostArray.length; i++) {
 
-                        let multiplierInput = $('#multiplier_' + i).val();
+                        let multiplierInput = 1;
+                        
+                        if ($('#multiplier_' + i).val() != 1) {
+                            let multiplierInput = $('#multiplier_' + i).val();
+                        }
+                    
+                        
 
+                        let userID = $('#userID').html();
+                        console.log(userID);
+
+
+                        exercisePostArray[i].userID = userID;
                         exercisePostArray[i].multiplier = multiplierInput;
                         console.log(exercisePostArray[i]);
                     }
@@ -654,8 +636,17 @@
 
                     for (let i = 0; i < nutritionPostArray.length; i++) {
 
-                        let multiplierInput = $('#multiplier_' + i).val();
+                        let multiplierInput = 1;
+                        
+                        if ($('#multiplier_' + i).val() != 1) {
+                            let multiplierInput = $('#multiplier_' + i).val();
+                        }
 
+
+                        let userID = $('#userID').html();
+                        console.log(userID);
+
+                        exercisePostArray[i].userID = userID;
                         nutritionPostArray[i].multiplier = multiplierInput;
                         console.log(nutritionPostArray[i]);
 
