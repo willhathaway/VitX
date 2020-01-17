@@ -1,27 +1,48 @@
 // controls routing etc for api
 
-const express = require('express');
+const sequelize = require("../../config/connections");
 
-const exersizes = require('../../data/exersizes');
+const exercises = require('../../data/exercises');
 
-const db = require("../../models");
+// const db = require("../../models");
+
+const Workouts = sequelize.import("../../models/Workouts.js");
+
+const Nutrition = sequelize.import("../../models/Nutrition.js");
 
 const moment = require("moment");
+
+const profile = require("../auth/profile-routes");
+
+console.log(profile);
 
 // const router = express.Router();
 
 module.exports = function (app) {
 
-    app.get("/api/exersizes", function (req, res) {
-        res.json(exersizes);
+    app.get("/api/exercises", function (req, res) {
+        res.json(exercises);
     });
 
     app.get("/api/workouts", function (req, res) {
         // get workout data from mysql
+
+        Workouts.findAll({})
+            .then(function (workoutData) {
+                res.json(workoutData);
+            });
+
+
     });
 
     app.get("/api/nutrition", function (req, res) {
         // get nutrition data from mysql
+
+        Nutrition.findAll({})
+            .then(function (nutritionData) {
+                res.json(nutritionData);
+            });
+
     });
 
     // -=-=-=-=-=-=-=-=-=-=-=
@@ -71,40 +92,56 @@ module.exports = function (app) {
 
         // post to workouts table in mysql
 
-        console.log(req.body);
-        res.send(req.body);
+        let reqBody = req.body.data;
 
+        console.log(reqBody);
+
+        for (let i = 0; i < req.body.data.length; i++) {
+
+            Workouts.create({
+
+                userID: 1,
+                date: moment(),
+                name: reqBody[i].name,
+                defaultTime: reqBody[i].defaultTime,
+                calories: reqBody[i].calsPerRep,
+                multiplier: reqBody[i].multiplier,
+                totalCalories: reqBody[i].calsPerRep * 1 // reqBody[i].multiplier
+
+            }).then(function (results) {
+                console.log('results: ' + results)
+                res.end();
+            })
+
+        }
+
+        // bulkCreate()
 
     });
 
     app.post("/api/nutrition", function (req, res) {
 
-        // post to nutrition table in mysql
-        console.log(req[0].food);
+        let reqBody = req.body.data;
 
+        console.log(reqBody);
 
-        for (let i = 0; i < req.length; i++) {
-            res.send(req[i].food);
+        for (let i = 0; i < reqBody.length; i++) {
+
+            Nutrition.create({
+
+                userID: 1,
+                date: moment(),
+                name: reqBody[i].label,
+                calories: reqBody[i].nutrients.ENERC_KCAL,
+                multiplier: reqBody[i].multiplier,
+                totalCalories: reqBody[i].nutrients.ENERC_KCAL * reqBody[i].multiplier
+
+            }).then(function (results) {
+                console.log('results: ' + results);
+                res.end();
+            })
+
         }
-
-
-
-        // res.body contains one object differentiated by keys
-
-        // i need to break the object up based on the key, and submit each object individually to the database
-
-
-        // db.Nutrition.create({
-        //     user = 'Will',
-        //     date = moment(),
-        //     id = 0,
-        //     name = req.body,
-        //     calories = calories,
-        //     multiplier = multiplier
-        // }).then(function(dbNutrition) {
-        //     res.JSON(dbNutrition);
-        // })
-
 
     });
 
