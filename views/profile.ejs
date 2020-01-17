@@ -50,7 +50,7 @@
 
     <header>
         <h1>Welcome to your profile, <%= user %>!</h1>
-        <!-- <h2> Your id is: <%= id%>.</h2> -->
+        <h2 id="userID"> Your id is: <%= id%>.</h2>
 
     </header>
     <main>
@@ -446,6 +446,7 @@
 
 
         <script>
+
             $(document).ready(function () {
 
                 console.log("javascript loaded")
@@ -599,8 +600,19 @@
 
                     for (let i = 0; i < exercisePostArray.length; i++) {
 
-                        let multiplierInput = $('#multiplier_' + i).val();
+                        let multiplierInput = 1;
+                        
+                        if ($('#multiplier_' + i).val() != 1) {
+                            let multiplierInput = $('#multiplier_' + i).val();
+                        }
+                    
+                        
 
+                        let userID = $('#userID').html();
+                        console.log(userID);
+
+
+                        exercisePostArray[i].userID = userID;
                         exercisePostArray[i].multiplier = multiplierInput;
                         console.log(exercisePostArray[i]);
                     }
@@ -624,8 +636,17 @@
 
                     for (let i = 0; i < nutritionPostArray.length; i++) {
 
-                        let multiplierInput = $('#multiplier_' + i).val();
+                        let multiplierInput = 1;
+                        
+                        if ($('#multiplier_' + i).val() != 1) {
+                            let multiplierInput = $('#multiplier_' + i).val();
+                        }
 
+
+                        let userID = $('#userID').html();
+                        console.log(userID);
+
+                        exercisePostArray[i].userID = userID;
                         nutritionPostArray[i].multiplier = multiplierInput;
                         console.log(nutritionPostArray[i]);
 
