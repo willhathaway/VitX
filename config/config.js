@@ -1,7 +1,7 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": process.env.password,
     "database": "blazedb",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -15,11 +15,6 @@ module.exports = {
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "use_env_variable": "DATABASE_URL"
   }
 }
