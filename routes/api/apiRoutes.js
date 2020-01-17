@@ -20,11 +20,11 @@ console.log(profile);
 
 module.exports = function (app) {
 
-    app.get("/api/exercises", function (req, res) {
+    app.get("/profile/api/exercises", function (req, res) {
         res.json(exercises);
     });
 
-    app.get("/api/workouts", function (req, res) {
+    app.get("/profile/api/workouts", function (req, res) {
         // get workout data from mysql
 
         Workouts.findAll({})
@@ -35,7 +35,7 @@ module.exports = function (app) {
 
     });
 
-    app.get("/api/nutrition", function (req, res) {
+    app.get("/profile/api/nutrition", function (req, res) {
         // get nutrition data from mysql
 
         Nutrition.findAll({})
@@ -88,7 +88,7 @@ module.exports = function (app) {
 
 
 
-    app.post("/api/workouts", function (req, res) {
+    app.post("/profile/api/workouts", function (req, res) {
 
         // post to workouts table in mysql
 
@@ -119,7 +119,7 @@ module.exports = function (app) {
 
     });
 
-    app.post("/api/nutrition", function (req, res) {
+    app.post("/profile/api/nutrition", function (req, res) {
 
         let reqBody = req.body.data;
 

@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // set static folder (use is keyword for middleware):
-app.use(express.static(path.join(__dirname, 'view')))
+app.use(express.static(path.join(__dirname, 'views')))
 
 //app.use('/api/control', require(exercises))
 
@@ -37,6 +37,7 @@ require("./routes/api/apiRoutes")(app);
 
 //set up view engine 
 app.set('view engine', 'ejs');
+app.use(express.static("views"))
 
 //use cookie seesion
 app.use(cookieSession({
@@ -59,10 +60,8 @@ app.use('/profile', profileRoutes)
 
 //create home route
 app.get('/', (req, res) => {
-
-    res.render('home');
+    res.render('login');
 });
-
 
 const PORT = process.env.PORT || 5000;
 
