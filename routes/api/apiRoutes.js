@@ -14,6 +14,8 @@ const moment = require("moment");
 
 const profile = require("../auth/profile-routes");
 
+
+
 console.log(profile);
 
 // const router = express.Router();
@@ -77,16 +79,12 @@ module.exports = function (app) {
 
 
 
-
-
-
-
     app.get("/css/index.css", function (req, res) {
         res.sendFile(path.join(__dirname, '../../views/libraries/d3.js'))
     })
 
 
-
+    // posting to workouts table:
 
     app.post("/profile/api/workouts", function (req, res) {
 
@@ -118,6 +116,8 @@ module.exports = function (app) {
         // bulkCreate()
 
     });
+
+    // posting to nutrition table:
 
     app.post("/profile/api/nutrition", function (req, res) {
 

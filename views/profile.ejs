@@ -489,9 +489,13 @@
 
                     let food = $('#foodSearch').val();
 
+                    $.get("/profile/app/env", function(data) {
+                        let app_key = process.env.APP_KEY
+                    })
+
                     let app_id = "319d5cf3";
 
-                    let app_key = "a6b7b2b30443063fa2630ff0dbc8f735"
+                    let app_key = "a6b7b2b30443063fa2630ff0dbc8f735";
 
                     let queryURL = "https://api.edamam.com/api/food-database/parser?limit=5&app_id=" +
                         app_id + "&app_key=" + app_key + "&ingr=" + food;

@@ -1,3 +1,5 @@
+// exercises data
+
 exercises = [
     {
         name: "running 10mph",
