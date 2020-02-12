@@ -1,14 +1,13 @@
 // controls routing etc for api
 
-const sequelize = require("../../config/connections");
 
 const exercises = require('../../data/exercises');
-
+const db = require("../../models")
 // const db = require("../../models");
 
-const Workouts = sequelize.import("../../models/Workouts.js");
+const Workouts = db.Workouts
 
-const Nutrition = sequelize.import("../../models/Nutrition.js");
+const Nutrition = db.Nutrition
 
 const moment = require("moment");
 
