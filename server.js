@@ -7,7 +7,10 @@ const app = express();
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const PORT = process.env.PORT || 5000;
+
+
 //dependencies auth
+
 const authRoutes = require('./routes/auth/auth-routes');
 const profileRoutes = require('./routes/auth/profile-routes');
 const passportSetup = require('./config/passport-setup.js');
@@ -47,6 +50,7 @@ app.use(cookieSession({
 
 models.sequelize.sync().then(() => {
     app.listen(PORT, () => console.log('server started on port ' + PORT));
+
 })
 
 //passaport init and use cookie
@@ -61,7 +65,6 @@ app.use('/profile', profileRoutes)
 app.get('/', (req, res) => {
     res.render('login');
 });
-
 
 
 

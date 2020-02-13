@@ -4,16 +4,10 @@
 const exercises = require('../../data/exercises');
 const db = require("../../models")
 // const db = require("../../models");
-
 const Workouts = db.Workouts
-
 const Nutrition = db.Nutrition
-
 const moment = require("moment");
-
 const profile = require("../auth/profile-routes");
-
-
 
 console.log(profile);
 
