@@ -1,0 +1,180 @@
+// :: -- :: -- :: --- :: -- :: -- :: 
+// This sass file is strictly for the MAIN LAYOUT of 
+// of the application. Everything else specific to 
+// page needs to have its own .scss file. 
+// 
+//  This means that this .scss file is primary for
+// layouts that will be on every page. 
+// 
+// Create variables that will are specific to this. 
+// 
+// Use appropriate separators:
+// 
+// 
+// 
+//
+// :: -- :: -- :: --- :: -- :: -- :: 
+
+
+// -=-=-=-=-=-=-=-=-=-=
+// Sidebar Styling
+// -=-=-=-=-=-=-=-=-=-=
+
+wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+};
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 35vh;
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+
+
+
+a, a:hover, a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+#sidebar {
+  /* don't forget to add all the previously mentioned styles here too */
+  background: #434343;
+  background: -moz-linear-gradient(-45deg, #434343 0%, #000000 100%);
+  background: -webkit-linear-gradient(-45deg, #434343 0%, #000000 100%);
+  background: linear-gradient(135deg, #434343 0%, #000000 100%);
+  color: #fff;
+  transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: #434343;
+  background: -moz-linear-gradient(-45deg, #434343 0%, #000000 100%);
+  background: -webkit-linear-gradient(-45deg, #434343 0%, #000000 100%);
+  background: linear-gradient(135deg, #434343 0%, #000000 100%);
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid brown;
+}
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+#sidebar ul li a:hover {
+  color: #434343;
+  background: gray;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+  color: #fff;
+  background: brown;
+}
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: brown;
+}
+
+// #sidebar {
+//   position: fixed;
+// }
+
+// -=-=-=-=-=-=-=-=-=-=
+// Main Components :: 
+// -=-=-=-=-=-=-=-=-=-=
+
+#menu {
+  // position: none !important;
+  z-index: 1;
+  -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+  
+}
+
+
+#box1 {
+  z-index: -3;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#box2 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+
+padding-left: 20vh;
+}
+
+#box3 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#box4 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#box5 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#box6 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#box7 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#box8 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#pageClear {
+  margin-bottom: 360px;
+}

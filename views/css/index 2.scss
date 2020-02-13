@@ -1,0 +1,155 @@
+// ==::==::==::==::==::==::==::==::==::==::==::==::==
+// Library Of Variables
+// For: Single Page Applications
+// 
+// Table of Contents: 
+// Section A: Standard Colors
+// Section B: Standard Color Gradients
+// Section C: Standard Box Styles
+// Section D: Standard Fonts
+// Section E: Standard Animations
+// Section F: Standard Media Queries
+// 
+// Section 2A: Custom Colors Palettes
+// Section 2B: Custom Color Gradient Palettes
+// Section 2C: Custom Box Styles
+// Section 2D: Custom Fonts
+// Section 2E: Custom CSS Animations
+// Section 2F: Custom Media Queries
+// 
+// ==::==::==:: Order of Files ==::==::==
+// [ * ] 
+// Background
+// Animations (optional) 
+// Headings
+// text
+// Media-Related (optional)
+// 
+// 
+// 
+// 
+// 
+// ==::==::==::==::==::==::==::==::==::==::==::==::==
+
+$color1: black;
+$color2: white;
+$color3: red;
+$color4: green;
+$color5: blue;
+$color6: yellow;
+
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Section B: Standard Color Gradients
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+//grandient1:
+$cg11: #CE5937;
+$cg12:  -moz-linear-gradient(left, #CE5937 0%, #C59237 100%);
+$cg13: -webkit-linear-gradient(left, #CE5937 0%, #C59237 100%);
+$cg14: linear-gradient(to right, #CE5937 0%, #C59237 100%);
+
+
+
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Section 2A: Custom Colors Palettes
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$c3p1: lightgrey;
+$c3p2: #868f96;
+$c3p3: #596164;
+
+
+
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Section 2D: Custom Fonts
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+$GF1: 'Girassol', cursive;
+
+
+// ::: === ::: === ::: === ::: === ::: === ::: ===
+// Actual Code for page ( :: Below :: ) 
+
+html, body {
+  margin: -10;
+  padding: -10;
+}
+
+
+
+body {
+  background-color: $color1; 
+  
+  background: #434343;
+background: -moz-linear-gradient(-45deg, #434343 0%, #000000 100%);
+background: -webkit-linear-gradient(-45deg, #434343 0%, #000000 100%);
+background: linear-gradient(135deg, #434343 0%, #000000 100%);
+};
+
+
+h1 {
+  color: $color2; 
+  font-family: $GF1;
+
+};
+
+h2 {
+  color: $color3; 
+  font-family: $GF1;
+
+};
+
+h3 {
+  color: $color3; 
+  font-family: $GF1;
+
+};
+
+
+h4 {
+  color: $color5;
+  font-family: $GF1;
+};
+
+h5 {
+  
+  
+};
+
+p {
+  color: $color2; 
+  // font-family: $GF1;
+
+};
+
+
+#button {
+  margin-left: 100px;
+  
+}
+
+#box1 {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#authentication {
+  margin-bottom: 200px;
+}
+
+#log {
+  -webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+}
+
+#button2 {
+  margin-left: 150px;
+}
+
+
+// @media () {
+
+// }
+
