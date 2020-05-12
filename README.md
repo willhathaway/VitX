@@ -6,4 +6,6 @@ Logging in with Google Authentication, users can add exercises from a local tabl
 
 jQuery is used to dynamically display user data, and to display their form before they submit it.
 
+![vitx-image](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+
 Thanks!
